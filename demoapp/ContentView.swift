@@ -248,19 +248,19 @@ struct TestView: View {
 
                     // 5️⃣ Native TextField
                     HStack {
-                        Text("5️⃣ Native TextField ✅ input not editable via remote ❌ (tvOS limitation)")
+                        Text("5️⃣ Native TextField ✅ ")
                         Spacer()
                         TextField("Enter text...", text: $inputText)
                             .padding(8)
                             .frame(width: 300)
                             .background(Color.gray.opacity(0.3))
                             .cornerRadius(6)
-                            .disabled(true) // tvOS 無法直接輸入
+                            // .disabled(true) // tvOS 無法直接輸入
                     }
 
                     // 6️⃣ Native ColorPicker
                     HStack {
-                        Text("6️⃣ Native ColorPicker tvOS doesn't support ❌")
+                        Text("6️⃣ Native ColorPicker tvOS doesn't support(compile error) ❌")
                         Spacer()
                         // ❌ ColorPicker is unavailable in tvOS
                         // ColorPicker("Pick Color", selection: $selectedColor)
