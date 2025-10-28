@@ -107,9 +107,112 @@ struct SubOptionView: View {
         .navigationTitle(title)
     }
 }
-struct FocusableMenu: View {
-    @FocusState private var isFocused: Bool
+struct TabViewTestPage: View {
+    let tvOSVersion: String
+    let onBack: () -> Void
+    @State private var selectedTab = 0
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        VStack(spacing: 30) {
+            Text("TabView Focus Test")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            Text("Use left/right arrows to navigate between tabs")
+                // .font(.title3)
+                .foregroundColor(.secondary)
+            
+            TabView(selection: $selectedTab) {
+                VStack(spacing: 30) {
+                    Text("Tab 1 Content")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Text("First tab view")
+                        .font(.title2)
+                    Text("Current selection: \(selectedTab)")
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                    Button("Tab 1 Action") {
+                        print("Tab 1 button tapped")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                }
+                .tag(0)
+                .tabItem {
+                    Image(systemName: "1.circle.fill")
+                    Text("Tab 1")
+                }
+                
+                VStack(spacing: 30) {
+                    Text("Tab 2 Content")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Text("Second tab view")
+                        .font(.title2)
+                    Text("Current selection: \(selectedTab)")
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                    Button("Tab 2 Action") {
+                        print("Tab 2 button tapped")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                }
+                .tag(1)
+                .tabItem {
+                    Image(systemName: "2.circle.fill")
+                    Text("Tab 2")
+                }
+                
+                VStack(spacing: 30) {
+                    Text("Tab 3 Content")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Text("Third tab view")
+                        .font(.title2)
+                    Text("Current selection: \(selectedTab)")
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                    Button("Tab 3 Action") {
+                        print("Tab 3 button tapped")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                }
+                .tag(2)
+                .tabItem {
+                    Image(systemName: "3.circle.fill")
+                    Text("Tab 3")
+                }
+            }
+            .tabViewStyle(.page(indexDisplayMode: .always))
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Button("Back to Previous Page") {
+                dismiss()
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .padding(.bottom, 50)
+        }
+        .padding(40)
+        .navigationTitle("TabView Test")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Back") {
+                    dismiss()
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
+        }
+    }
+}
 
+struct FocusableMenu: View {
     var body: some View {
         Menu {
             Button("Settings") { print("Settings tapped") }
@@ -120,10 +223,7 @@ struct FocusableMenu: View {
         } label: {
             Image(systemName: "ellipsis.circle.fill")
                 .font(.title)
-                .foregroundColor(isFocused ? .accentColor : .primary)
         }
-        .focused($isFocused)
-        .focusable(true)
     }
 }
 
@@ -136,6 +236,7 @@ struct ContentView: View {
     @FocusState private var focused: Bool
     @State private var selectedOption: String? = nil
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
+    
 
     var tvOSVersion: String {
         UIDevice.current.systemVersion
@@ -146,6 +247,10 @@ struct ContentView: View {
             List {
                 Button("Go to Test Page") {
                     selectedOption = "Test Page"
+                }
+                
+                Button("TabView Focus Test") {
+                    selectedOption = "TabView Test"
                 }
                 
                 Button("Option 1") {
@@ -167,6 +272,8 @@ struct ContentView: View {
                     switch option {
                     case "Test Page":
                         TestView(tvOSVersion: tvOSVersion)
+                    case "TabView Test":
+                        TabViewTestPage(tvOSVersion: tvOSVersion, onBack: { selectedOption = nil })
                     case "Option 1":
                         Option1View(tvOSVersion: tvOSVersion, onBack: { selectedOption = nil })
                     case "Option 2":
@@ -187,6 +294,7 @@ struct ContentView: View {
                         
                         VStack(alignment: .leading, spacing: 10) {
                             Text("• Go to Test Page - SwiftUI Native API Test")
+                            Text("• TabView Focus Test - Isolated TabView testing environment")
                             Text("• Option 1 - Simple Option Page")
                             Text("• Option 2 - Another Simple Option Page")
                             Text("• Option 3 (Menu Style) - Page with Submenu")
@@ -219,7 +327,8 @@ struct TestView: View {
     @FocusState private var focused: Bool
     @State private var showAlert = false
     @State private var showConfirmationDialog = false
-
+    @State private var progressValue: Double = 0.5
+    @State private var sliderValue: Double = 50.0
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -261,18 +370,23 @@ struct TestView: View {
                     }
 
                     // 6️⃣ Native ColorPicker
-                    HStack {
-                        Text("6️⃣ Native ColorPicker tvOS doesn't support(compile error) ❌")
-                        Spacer()
-                        // ❌ ColorPicker is unavailable in tvOS
-                        // ColorPicker("Pick Color", selection: $selectedColor)
-                        //     .frame(width: 150)
-                        //     .focusable(true)
-                    }
+                    // Button(action: {
+                    //     // This is just a focusable text, no action needed
+                    // }) {
+                        HStack {
+                            Text("6️⃣ Native ColorPicker tvOS doesn't support(compile error) ❌")
+                            Spacer()
+                            Text("'ColorPicker' is unavailable in tvOS")
+                                .font(.caption)
+                                .foregroundColor(.red)
+                        }
+                    // }
+                    // .buttonStyle(.borderedProminent)
+                    // .allowsHitTesting(false)
 
                     // 7️⃣ Native Toolbar Menu
                     HStack {
-                        Text("7️⃣ Native Toolbar Menu (Menu) focused ✅, doesn't support dropdown menu on tvOS ❌")
+                        Text("7️⃣ Native Toolbar Menu (Menu)  ✅")
                         Spacer()
                         FocusableMenu()
                     }
@@ -309,7 +423,7 @@ struct TestView: View {
                             .pickerStyle(.menu)
                         }
                         HStack {
-                            Text("🔟 Picker (Segmented) doesn't support focus and move ❌ ")
+                            Text("🔟 Picker (Segmented) ✅ ")
                             Spacer()
                             Picker("Quality", selection: $selectedMode) {
                                 Text("Option1").tag("Option1")
@@ -317,8 +431,7 @@ struct TestView: View {
                                 Text("Option3").tag("Option3")
                             }
                             .pickerStyle(.segmented)
-                            .frame(width: 300)
-                            .focusable(true)
+                            .fixedSize()
                         }
                     }
 
@@ -371,9 +484,9 @@ struct TestView: View {
                             Button("cancel") {
                                 print("Alert: cancel button tapped")
                             }
-                            Button("delete", role: .destructive) {
-                                print("Alert: delete button tapped")
-                            }
+                            // Button("delete", role: .destructive) {
+                            //     print("Alert: delete button tapped")
+                            // }
                         } message: {
                             Text("This is an alert message.")
                         }
@@ -405,6 +518,125 @@ struct TestView: View {
                             Text("Please select an action to perform")
                         }
                     }
+
+                    // 1️⃣5️⃣ Native List
+                    VStack(alignment: .leading, spacing: 10) {
+                        Button(action: {
+                            // This is just a focusable text, no action needed
+                        }) {
+                            Text("1️⃣5️⃣ Native List ✅")
+                        }
+                        .buttonStyle(.plain)
+                        .allowsHitTesting(false)
+                        
+                        List {
+                            Text("List Item 1")
+                            Text("List Item 2") 
+                            Text("List Item 3")
+                            HStack {
+                                Text("Item with Button")
+                                Spacer()
+                                Button("Action") {
+                                    print("List item button tapped")
+                                }
+                                .buttonStyle(.borderedProminent)
+                            }
+                        }
+                        .frame(height: 200)
+                    }
+                    Spacer()
+                    // 1️⃣6️⃣ Native TabView with Focus Fix
+                    HStack {
+                        Text("1️⃣6️⃣ Native TabView ✅ ")
+                        Spacer()
+                        NavigationLink(destination: TabViewTestPage(tvOSVersion: tvOSVersion, onBack: {})) {
+                            Text("Go to TabView Test Page")
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+
+                    // 1️⃣7️⃣ Native Stepper (Not Available)
+                    Button(action: {
+                        // This is just a focusable text, no action needed
+                    }) {
+                        HStack {
+                            Text("1️⃣7️⃣ Native Stepper tvOS doesn't support (compile error) ❌")
+                            Spacer()
+                            Text("'Stepper' is unavailable in tvOS")
+                                .font(.caption)
+                                .foregroundColor(.red)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .allowsHitTesting(false) // 阻止點擊但保持可聚焦
+
+                    // 1️⃣8️⃣ Native Slider (Not Available) 
+                    Button(action: {
+                        // This is just a focusable text, no action needed
+                    }) {
+                        HStack {
+                            Text("1️⃣8️⃣ Native Slider tvOS doesn't support (compile error) ❌")
+                            Spacer()
+                            Text("'Slider' is unavailable in tvOS")
+                                .font(.caption)
+                                .foregroundColor(.red)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .allowsHitTesting(false) // 阻止點擊但保持可聚焦
+
+                    // 移除不需要的橋樑按鈕
+
+                    // 1️⃣9️⃣ Native ProgressView
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("1️⃣9️⃣ Native ProgressView ✅")
+                        
+                        HStack {
+                            Text("Indeterminate:")
+                            Spacer()
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .buttonStyle(.borderedProminent)
+                        }
+                        
+                        HStack {
+                            Text("Progress: \(Int(progressValue * 100))%")
+                            Spacer()
+                            ProgressView(value: progressValue)
+                                .frame(width: 300)
+                        }
+                        
+                        Button("Update Progress") {
+                            withAnimation {
+                                progressValue = progressValue >= 1.0 ? 0.0 : progressValue + 0.2
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+
+                    // 2️⃣0️⃣ Tips Section
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("2️⃣0️⃣ tvOS Focus Management Tips")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("• System Focus First: tvOS built-in focus system is comprehensive, avoid custom focus management")
+                            Text("• Avoid Conflicting Modifiers: Don't use .focused() and .focusable() together")
+                            Text("• Trust Built-in Components: Button, Menu, Toggle, Picker have complete focus support")
+                            Text("• .borderedProminent Style: Includes built-in focus effects, no extra focus management needed")
+                            // Text("• Use .fixedSize(): Let components auto-size based on content, more flexible than fixed sizes")
+                            Text("• Remote Controller Testing: All interactive elements should support Apple TV remote navigation")
+                            Text("• TabView Focus Fix: Wrap TabView with Button(.plain) to make it focusable from other elements")
+                            Text("• tvOS Limitations: ColorPicker, Stepper and Slider components are not available on tvOS platform")
+                        }
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .padding(.leading, 10)
+                    }
+                    .padding(20)
+                    .background(Color.secondary.opacity(0.1))
+                    .cornerRadius(12)
                 }
                 .padding()
                 // ✅ overlay moved to container
