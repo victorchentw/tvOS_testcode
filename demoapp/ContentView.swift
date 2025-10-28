@@ -217,6 +217,8 @@ struct TestView: View {
     @State private var showOverlay = false
     @State private var inputText = ""
     @FocusState private var focused: Bool
+    @State private var showAlert = false
+    @State private var showConfirmationDialog = false
 
     var body: some View {
         NavigationStack {
@@ -240,7 +242,7 @@ struct TestView: View {
                     HStack {
                         Text("4️⃣ Native Button ✅ focus & click ok")
                         Spacer()
-                        Button("Click Me") {
+                        Button("Native Button") {
                             print("Native Button tapped")
                         }
                         .buttonStyle(.borderedProminent)
@@ -277,7 +279,7 @@ struct TestView: View {
 
                     // 8️⃣ Native Toggle
                     HStack {
-                        Text("8️⃣ Native Toggle , switch ✅ , no focused state on tvOS ❌ background color can be changed ✅")
+                        Text("8️⃣ Native Toggle , switch ✅ , focus with remote controller ✅")
                         Spacer()
                         Toggle(isOn: $isEnabled) {
                             Text("Toggle Test")
@@ -288,8 +290,6 @@ struct TestView: View {
                         .frame(width: 400, height: 50)
                         .background(isEnabled ? Color.white.opacity(0.2) : Color.clear)
                         .cornerRadius(10)
-                        .focused($focused)
-                        .focusable(true)
                         .onTapGesture {
                             isEnabled.toggle()
                             print("Native Toggle switched to: \(isEnabled)")
@@ -324,7 +324,7 @@ struct TestView: View {
 
                     // 1️⃣1️⃣ Context Menu
                     HStack {
-                        Text("11️⃣ Context Menu (Long Press) ✅")
+                        Text("1️⃣1️⃣ Context Menu (Long Press) ✅")
                         Spacer()
                         Button("Show Options") {
                             print("Button tapped normally")
@@ -340,12 +340,11 @@ struct TestView: View {
                                 Text("Option3").tag("Option3")
                             }
                         }
-                        .focusable()
                     }
 
                     // 1️⃣2️⃣ Overlay Test
                     HStack {
-                        Text("12️⃣ Overlay (moved .overlay to VStack) ✅")
+                        Text("1️⃣2️⃣ Overlay (moved .overlay to VStack) ✅")
                         Spacer()
                         Button(action: {
                             showOverlay.toggle()
@@ -354,7 +353,57 @@ struct TestView: View {
                             Text(showOverlay ? "Hide Overlay" : "Show Overlay")
                         }
                         .buttonStyle(.borderedProminent)
-                        .focusable()
+                    }
+
+                    // 1️⃣3️⃣ Alert Test
+                    HStack {
+                        Text("1️⃣3️⃣ Alert (System AlertView) ✅")
+                        Spacer()
+                        Button("Show Alert") {
+                            showAlert = true
+                            print("Alert button tapped")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .alert("Native Alert", isPresented: $showAlert) {
+                            Button("ok", role: .cancel) {
+                                print("Alert: ok button tapped")
+                            }
+                            Button("cancel") {
+                                print("Alert: cancel button tapped")
+                            }
+                            Button("delete", role: .destructive) {
+                                print("Alert: delete button tapped")
+                            }
+                        } message: {
+                            Text("This is an alert message.")
+                        }
+                    }
+
+                    // 1️⃣4️⃣ ConfirmationDialog Test (ActionSheet on iOS, similar on tvOS)
+                    HStack {
+                        Text("1️⃣4️⃣ ConfirmationDialog (like ActionSheet) ✅")
+                        Spacer()
+                        Button("Show Options") {
+                            showConfirmationDialog = true
+                            print("ConfirmationDialog button tapped")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .confirmationDialog("Selection Option", isPresented: $showConfirmationDialog) {
+                            Button("Option 1") {
+                                print("ConfirmationDialog: Option 1 tapped")
+                            }
+                            Button("Option 2") {
+                                print("ConfirmationDialog: Option 2 tapped")
+                            }
+                            Button("Option 3", role: .destructive) {
+                                print("ConfirmationDialog: Option 3 tapped")
+                            }
+                            Button("Option 4", role: .cancel) {
+                                print("ConfirmationDialog: Option 4 tapped")
+                            }
+                        } message: {
+                            Text("Please select an action to perform")
+                        }
                     }
                 }
                 .padding()
