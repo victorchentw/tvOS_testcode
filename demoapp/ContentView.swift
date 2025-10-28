@@ -24,8 +24,7 @@ struct Option1View: View {
                 Button("Back to Menu") {
                     onBack()
                 }
-                .buttonStyle(.bordered)
-                .focusable(true)
+                .buttonStyle(.borderedProminent)
             }
         }
     }
@@ -47,8 +46,7 @@ struct Option2View: View {
                 Button("Back to Menu") {
                     onBack()
                 }
-                .buttonStyle(.bordered)
-                .focusable(true)
+                .buttonStyle(.borderedProminent)
             }
         }
     }
@@ -89,8 +87,7 @@ struct Option3View: View {
                     Button("Back to Menu") {
                         onBack()
                     }
-                    .buttonStyle(.bordered)
-                    .focusable(true)
+                    .buttonStyle(.borderedProminent)
                 }
             }
         }
@@ -126,7 +123,7 @@ struct FocusableMenu: View {
                 .foregroundColor(isFocused ? .accentColor : .primary)
         }
         .focused($isFocused)
-        .focusable()
+        .focusable(true)
     }
 }
 
@@ -150,19 +147,18 @@ struct ContentView: View {
                 Button("Go to Test Page") {
                     selectedOption = "Test Page"
                 }
-                .focusable(true)
+                
                 Button("Option 1") {
                     selectedOption = "Option 1"
                 }
-                .focusable(true)
+                
                 Button("Option 2") {
                     selectedOption = "Option 2"
                 }
-                .focusable(true)
+                
                 Button("Option 3 (Menu Style)") {
                     selectedOption = "Option 3"
                 }
-                .focusable(true)
             }
             .navigationTitle("Sidebar (NavigationSplitView ✅)")
         } detail: {
@@ -201,7 +197,6 @@ struct ContentView: View {
                             columnVisibility = .doubleColumn
                         }
                         .buttonStyle(.borderedProminent)
-                        .focusable(true)
                         .padding(.top, 20)
                         
                         Spacer()
@@ -222,7 +217,6 @@ struct TestView: View {
     @State private var showOverlay = false
     @State private var inputText = ""
     @FocusState private var focused: Bool
-    @FocusState private var buttonFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -250,12 +244,6 @@ struct TestView: View {
                             print("Native Button tapped")
                         }
                         .buttonStyle(.borderedProminent)
-                        .focused($buttonFocused)
-                        .focusable()
-                        .background(buttonFocused ? Color.blue.opacity(0.3) : Color.clear)
-                        .cornerRadius(8)
-                        .scaleEffect(buttonFocused ? 1.05 : 1.0)
-                        .animation(.easeInOut(duration: 0.2), value: buttonFocused)
                     }
 
                     // 5️⃣ Native TextField
@@ -301,7 +289,7 @@ struct TestView: View {
                         .background(isEnabled ? Color.white.opacity(0.2) : Color.clear)
                         .cornerRadius(10)
                         .focused($focused)
-                        .focusable()
+                        .focusable(true)
                         .onTapGesture {
                             isEnabled.toggle()
                             print("Native Toggle switched to: \(isEnabled)")
@@ -319,7 +307,6 @@ struct TestView: View {
                                 Text("4K").tag("4K")
                             }
                             .pickerStyle(.menu)
-                            .focusable(true)
                         }
                         HStack {
                             Text("🔟 Picker (Segmented) doesn't support focus and move ❌ ")
@@ -342,6 +329,7 @@ struct TestView: View {
                         Button("Show Options") {
                             print("Button tapped normally")
                         }
+                        .buttonStyle(.borderedProminent)
                         .contextMenu {
                             Button("Restart Stream") { print("Restart stream tapped") }
                             Button("Disconnect") { print("Disconnect tapped") }
@@ -352,7 +340,7 @@ struct TestView: View {
                                 Text("Option3").tag("Option3")
                             }
                         }
-                        .focusable(true)
+                        .focusable()
                     }
 
                     // 1️⃣2️⃣ Overlay Test
@@ -364,10 +352,8 @@ struct TestView: View {
                             print("showOverlay toggled to: \(showOverlay)")
                         }) {
                             Text(showOverlay ? "Hide Overlay" : "Show Overlay")
-                                .padding()
-                                .background(Color.blue.opacity(0.1))
-                                .cornerRadius(10)
                         }
+                        .buttonStyle(.borderedProminent)
                         .focusable()
                     }
                 }
