@@ -329,6 +329,7 @@ struct TestView: View {
     @State private var showConfirmationDialog = false
     @State private var progressValue: Double = 0.5
     @State private var sliderValue: Double = 50.0
+    @State private var selectedColor: Color = .blue
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -376,6 +377,9 @@ struct TestView: View {
                         HStack {
                             Text("6️⃣ Native ColorPicker tvOS doesn't support(compile error) ❌")
                             Spacer()
+                            // ColorPicker("Choose Color", selection: $selectedColor)
+                            //'ColorPicker' is unavailable in tvOS
+                            //'ColorPicker' has been explicitly marked unavailable here (SwiftUI.ColorPicker)
                             Text("'ColorPicker' is unavailable in tvOS")
                                 .font(.caption)
                                 .foregroundColor(.red)
@@ -562,7 +566,9 @@ struct TestView: View {
                         HStack {
                             Text("1️⃣7️⃣ Native Stepper tvOS doesn't support (compile error) ❌")
                             Spacer()
-                            //Stepper(value: $stepperValue, in: 0...10) {
+                            // Stepper(value: $sliderValue, in: 0...10) {}
+                            //'Stepper' is unavailable in tvOS
+                            //'Stepper' has been explicitly marked unavailable here (SwiftUI.Stepper)
                             Text("'Stepper' is unavailable in tvOS")
                                 .font(.caption)
                                 .foregroundColor(.red)
@@ -578,7 +584,9 @@ struct TestView: View {
                         HStack {
                             Text("1️⃣8️⃣ Native Slider tvOS doesn't support (compile error) ❌")
                             Spacer()
-                            //Slider(value: $sliderValue, in: 0...100, step: 1)
+                            // Slider(value: $sliderValue, in: 0...100, step: 1)
+                            // 'Slider' is unavailable in tvOS
+                            // 'Slider' has been explicitly marked unavailable here (SwiftUI.Slider)
                             Text("'Slider' is unavailable in tvOS")
                                 .font(.caption)
                                 .foregroundColor(.red)
