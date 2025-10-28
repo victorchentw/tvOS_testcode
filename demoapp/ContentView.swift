@@ -562,6 +562,7 @@ struct TestView: View {
                         HStack {
                             Text("1️⃣7️⃣ Native Stepper tvOS doesn't support (compile error) ❌")
                             Spacer()
+                            //Stepper(value: $stepperValue, in: 0...10) {
                             Text("'Stepper' is unavailable in tvOS")
                                 .font(.caption)
                                 .foregroundColor(.red)
@@ -577,6 +578,7 @@ struct TestView: View {
                         HStack {
                             Text("1️⃣8️⃣ Native Slider tvOS doesn't support (compile error) ❌")
                             Spacer()
+                            //Slider(value: $sliderValue, in: 0...100, step: 1)
                             Text("'Slider' is unavailable in tvOS")
                                 .font(.caption)
                                 .foregroundColor(.red)
