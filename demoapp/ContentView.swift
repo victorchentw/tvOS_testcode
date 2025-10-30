@@ -75,6 +75,15 @@ struct Option3View: View {
                     NavigationLink("Sub Option C") {
                         SubOptionView(title: "Sub Option C", tvOSVersion: tvOSVersion)
                     }
+
+                    Section("Nexus") {
+                        NavigationLink("NexusiOSSwiftUI component test") {
+                            NexusSwiftUIComponentListView()
+                        }
+                        NavigationLink("NexusiOSUIKit component test") {
+                            NexusUIKitComponentListView()
+                        }
+                    }
                 }
                 .navigationTitle("Sub Options")
                 
@@ -264,6 +273,22 @@ struct ContentView: View {
                 Button("Option 3 (Menu Style)") {
                     selectedOption = "Option 3"
                 }
+
+                Section("Nexus SwiftUI Components") {
+                    ForEach(NexusSwiftUIComponent.allCases, id: \.id) { component in
+                        Button(component.title) {
+                            selectedOption = "Nexus SwiftUI: \(component.rawValue)"
+                        }
+                    }
+                }
+                
+                Section("Nexus UIKit Components") {
+                    ForEach(NexusUIKitComponent.allCases, id: \.id) { component in
+                        Button(component.title) {
+                            selectedOption = "Nexus UIKit: \(component.rawValue)"
+                        }
+                    }
+                }
             }
             .navigationTitle("Sidebar (NavigationSplitView ✅)")
         } detail: {
@@ -280,6 +305,24 @@ struct ContentView: View {
                         Option2View(tvOSVersion: tvOSVersion, onBack: { selectedOption = nil })
                     case "Option 3":
                         Option3View(tvOSVersion: tvOSVersion, onBack: { selectedOption = nil })
+                    case let option where option.starts(with: "Nexus SwiftUI: "):
+                        let componentRawValue = String(option.dropFirst("Nexus SwiftUI: ".count))
+                        if let component = NexusSwiftUIComponent(rawValue: componentRawValue) {
+                            NavigationStack {
+                                NexusSwiftUIDetail(item: component, selectedOption: $selectedOption)
+                            }
+                        } else {
+                            TestView(tvOSVersion: tvOSVersion)
+                        }
+                    case let option where option.starts(with: "Nexus UIKit: "):
+                        let componentRawValue = String(option.dropFirst("Nexus UIKit: ".count))
+                        if let component = NexusUIKitComponent(rawValue: componentRawValue) {
+                            NavigationStack {
+                                NexusUIKitDetail(item: component, selectedOption: $selectedOption)
+                            }
+                        } else {
+                            TestView(tvOSVersion: tvOSVersion)
+                        }
                     default:
                         TestView(tvOSVersion: tvOSVersion)
                     }
