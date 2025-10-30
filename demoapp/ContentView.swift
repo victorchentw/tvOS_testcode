@@ -274,23 +274,18 @@ struct ContentView: View {
                     selectedOption = "Option 3"
                 }
 
-                Section("Nexus SwiftUI Components") {
-                    ForEach(NexusSwiftUIComponent.allCases, id: \.id) { component in
-                        Button(component.title) {
-                            selectedOption = "Nexus SwiftUI: \(component.rawValue)"
-                        }
+                Section("Nexus Components") {
+                    Button("SwiftUI Test") {
+                        selectedOption = "SwiftUI Overview"
                     }
-                }
-                
-                Section("Nexus UIKit Components") {
-                    ForEach(NexusUIKitComponent.allCases, id: \.id) { component in
-                        Button(component.title) {
-                            selectedOption = "Nexus UIKit: \(component.rawValue)"
-                        }
+                    
+                    Button("UIKit Test") {
+                        selectedOption = "UIKit Overview"
                     }
                 }
             }
-            .navigationTitle("Sidebar (NavigationSplitView ✅)")
+            .font(.title3) // 設定側邊欄字型大小為 title3
+            .navigationTitle("Nexus Components")
         } detail: {
             Group {
                 if let option = selectedOption {
@@ -305,6 +300,10 @@ struct ContentView: View {
                         Option2View(tvOSVersion: tvOSVersion, onBack: { selectedOption = nil })
                     case "Option 3":
                         Option3View(tvOSVersion: tvOSVersion, onBack: { selectedOption = nil })
+                    case "SwiftUI Overview":
+                        SwiftUIComponentsOverview(selectedOption: $selectedOption)
+                    case "UIKit Overview":
+                        UIKitComponentsOverview(selectedOption: $selectedOption)
                     case let option where option.starts(with: "Nexus SwiftUI: "):
                         let componentRawValue = String(option.dropFirst("Nexus SwiftUI: ".count))
                         if let component = NexusSwiftUIComponent(rawValue: componentRawValue) {
@@ -312,7 +311,7 @@ struct ContentView: View {
                                 NexusSwiftUIDetail(item: component, selectedOption: $selectedOption)
                             }
                         } else {
-                            TestView(tvOSVersion: tvOSVersion)
+                            WelcomeView(columnVisibility: $columnVisibility)
                         }
                     case let option where option.starts(with: "Nexus UIKit: "):
                         let componentRawValue = String(option.dropFirst("Nexus UIKit: ".count))
@@ -321,39 +320,13 @@ struct ContentView: View {
                                 NexusUIKitDetail(item: component, selectedOption: $selectedOption)
                             }
                         } else {
-                            TestView(tvOSVersion: tvOSVersion)
+                            WelcomeView(columnVisibility: $columnVisibility)
                         }
                     default:
-                        TestView(tvOSVersion: tvOSVersion)
+                        WelcomeView(columnVisibility: $columnVisibility)
                     }
                 } else {
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("NavigationSplitView test ok ✅")
-                            .font(.title)
-                            .fontWeight(.bold)
-                        
-                        Text("please open the sidebar and select an option:")
-                            .font(.headline)
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("• Go to Test Page - SwiftUI Native API Test")
-                            Text("• TabView Focus Test - Isolated TabView testing environment")
-                            Text("• Option 1 - Simple Option Page")
-                            Text("• Option 2 - Another Simple Option Page")
-                            Text("• Option 3 (Menu Style) - Page with Submenu")
-                        }
-                        .padding(.leading, 20)
-                        
-                        Button("display Sidebar") {
-                            columnVisibility = .doubleColumn
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .padding(.top, 20)
-                        
-                        Spacer()
-                    }
-                    .padding()
-                    .navigationTitle("歡迎")
+                    WelcomeView(columnVisibility: $columnVisibility)
                 }
             }
         }
@@ -707,6 +680,162 @@ struct TestView: View {
                 }
             }
             .navigationTitle("(NavigationTitle)SwiftUI Native API Test (tvOS \(tvOSVersion))")
+        }
+    }
+}
+
+// MARK: - Welcome View
+struct WelcomeView: View {
+    @Binding var columnVisibility: NavigationSplitViewVisibility
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Nexus Components Test")
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("Please select a test type from the sidebar:")
+                .font(.headline)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text("• SwiftUI Test - View all SwiftUI components")
+                Text("• UIKit Test - View all UIKit components")
+            }
+            .padding(.leading, 20)
+            
+            Button("Show Sidebar") {
+                columnVisibility = .doubleColumn
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(.top, 20)
+            
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Welcome")
+    }
+}
+
+// MARK: - SwiftUI Components Overview
+struct SwiftUIComponentsOverview: View {
+    @Binding var selectedOption: String?
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 190), spacing: 10)
+    ]
+    
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(NexusSwiftUIComponent.allCases, id: \.id) { component in
+                        Button(action: {
+                            selectedOption = "Nexus SwiftUI: \(component.rawValue)"
+                        }) {
+                            VStack(spacing: 8) {
+                                Text(component.title)
+                                    .font(.body) // 組件名稱字型
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .minimumScaleFactor(0.5) // 最小縮放到 50%
+                                
+                                Text(component.title.contains("✅") ? "Supported" : "Not Supported")
+                                    // .font(.caption) // 支援狀態字型
+                                    .font(.system(size: 12)) 
+                                    .foregroundColor(component.title.contains("✅") ? .green : .red)
+                            }
+                            .frame(minHeight: 80)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(component.title.contains("✅") ? 
+                                          Color.green.opacity(0.1) : 
+                                          Color.red.opacity(0.1))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(component.title.contains("✅") ? 
+                                           Color.green.opacity(0.3) : 
+                                           Color.red.opacity(0.3), lineWidth: 1)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("SwiftUI Components")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Back") {
+                        selectedOption = nil
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - UIKit Components Overview
+struct UIKitComponentsOverview: View {
+    @Binding var selectedOption: String?
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 190), spacing: 10)
+    ]
+    
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(NexusUIKitComponent.allCases, id: \.id) { component in
+                        Button(action: {
+                            selectedOption = "Nexus UIKit: \(component.rawValue)"
+                        }) {
+                            VStack(spacing: 4) {
+                                Text(component.title)
+                                .font(.body) // 組件名稱字型
+                                    // .font(.system(size: 20)) // 組件名稱字型
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .minimumScaleFactor(0.5) // 最小縮放到 50%
+
+                                Text(component.title.contains("✅") ? "Supported" : "Not Supported")
+                                    .font(.system(size: 12)) // 支援狀態字型
+                                    .foregroundColor(component.title.contains("✅") ? .green : .red)
+                            }
+                            .frame(minHeight: 80)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(component.title.contains("✅") ? 
+                                          Color.green.opacity(0.1) : 
+                                          Color.red.opacity(0.1))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(component.title.contains("✅") ? 
+                                           Color.green.opacity(0.3) : 
+                                           Color.red.opacity(0.3), lineWidth: 1)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("UIKit Components")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Back") {
+                        selectedOption = nil
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            }
         }
     }
 }
