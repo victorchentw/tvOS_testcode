@@ -254,25 +254,25 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             List {
-                Button("Go to Test Page") {
+                Button("Test Page") {
                     selectedOption = "Test Page"
                 }
                 
-                Button("TabView Focus Test") {
+                Button("TabView") {
                     selectedOption = "TabView Test"
                 }
                 
-                Button("Option 1") {
-                    selectedOption = "Option 1"
-                }
+                // Button("Option 1") {
+                //     selectedOption = "Option 1"
+                // }
                 
-                Button("Option 2") {
-                    selectedOption = "Option 2"
-                }
+                // Button("Option 2") {
+                //     selectedOption = "Option 2"
+                // }
                 
-                Button("Option 3 (Menu Style)") {
-                    selectedOption = "Option 3"
-                }
+                // Button("Option 3 (Menu Style)") {
+                //     selectedOption = "Option 3"
+                // }
 
                 Section("Nexus Components") {
                     Button("SwiftUI Test") {
@@ -294,8 +294,16 @@ struct ContentView: View {
                     }
                 }
             }
-            .font(.title3) // 設定側邊欄字型大小為 title3
+            .font(.title3) 
+            // .navigationSplitViewColumnWidth(min: 660, ideal: 720, max: 800) // 用有限範圍，別用 .infinity
+            // .navigationSplitViewStyle(.balanced)
+            // navigationSplitViewStyle .balanced doesn't work in tvOS
+            // navigationsplitViewColumnWidth doesn't affect liquid glass well in tvOS
+  
             .navigationTitle("Nexus Components")
+            .listStyle(.sidebar)
+            //.listStyle(.sidebar) 'sidebar' is unavailable in tvOS
+
         } detail: {
             Group {
                 if let option = selectedOption {
@@ -684,9 +692,10 @@ struct TestView: View {
                             Text("• Trust Built-in Components: Button, Menu, Toggle, Picker have complete focus support")
                             Text("• .borderedProminent Style: Includes built-in focus effects, no extra focus management needed")
                             // Text("• Use .fixedSize(): Let components auto-size based on content, more flexible than fixed sizes")
-                            Text("• Remote Controller Testing: All interactive elements should support Apple TV remote navigation")
                             Text("• TabView Focus Fix: Wrap TabView with Button(.plain) to make it focusable from other elements")
                             Text("• tvOS Limitations: ColorPicker, Stepper and Slider components are not available on tvOS platform")
+                            Text("• navigationSplitViewStyle .balanced doesn't work in tvOS")
+                            Text("• navigationSplitViewColumnWidth doesn't affect liquid glass well in tvOS")
                         }
                         .font(.caption)
                         .foregroundColor(.secondary)
