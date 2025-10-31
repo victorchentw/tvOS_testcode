@@ -60,8 +60,8 @@ struct NeuronSwiftUIDetail: View {
                 Divider()
                 demo
                 Spacer(minLength: 20)
-                Button("Back to Sidebar") {
-                    selectedOption = nil
+                Button("Back to Neuron SwiftUI Overview") {
+                    selectedOption = "Neuron SwiftUI Overview"
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)

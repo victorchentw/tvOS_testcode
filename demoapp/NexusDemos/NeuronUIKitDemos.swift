@@ -4,46 +4,51 @@
 import SwiftUI
 import UIKit
 
-// MARK: - UIKit Component Enum (Most Used Components)
+// MARK: - UIKit Component Enum (41 Components)
 
 enum NeuronUIKitComponent: String, CaseIterable, Identifiable {
-    // Core UI Components (sorted by usage)
-    case uiView = "UIView✅"
-    case uiApplication = "UIApplication✅"
-    case uiColor = "UIColor✅"
-    case uiViewController = "UIViewController✅"
-    case uiImage = "UIImage✅"
-    case uiAlertAction = "UIAlertAction✅"
-    case uiLabel = "UILabel✅"
-    case uiScreen = "UIScreen✅"
-    case uiFont = "UIFont✅"
-    case uiAlertController = "UIAlertController✅"
-    case uiButton = "UIButton✅"
-    case uiTouch = "UITouch✅"
-    case uiKeyCommand = "UIKeyCommand✅"
-    case uiTextField = "UITextField✅"
-    case uiImageView = "UIImageView✅"
-    
-    // Gesture Recognizers
-    case uiTapGestureRecognizer = "UITapGestureRecognizer✅"
-    case uiLongPressGestureRecognizer = "UILongPressGestureRecognizer✅"
-    case uiGestureRecognizer = "UIGestureRecognizer✅"
-    
-    // Additional Components
-    case uiWindow = "UIWindow✅"
-    case uiTextView = "UITextView✅"
-    case uiTableView = "UITableView✅"
-    case uiWindowScene = "UIWindowScene✅"
-    case uiContextMenuInteraction = "UIContextMenuInteraction✅"
-    case uiHostingController = "UIHostingController✅"
-    case uiVisualEffectView = "UIVisualEffectView✅"
-    case uiCollectionView = "UICollectionView✅"
-    case uiStoryboard = "UIStoryboard✅"
+    // Core UI Components (sorted alphabetically)
     case uiActivityIndicatorView = "UIActivityIndicatorView✅"
-    
-    // Representable Protocols
+    case uiAlertAction = "UIAlertAction✅"
+    case uiAlertController = "UIAlertController✅"
+    case uiApplication = "UIApplication✅"
+    case uiButton = "UIButton✅"
+    case uiCollectionView = "UICollectionView✅"
+    case uiColor = "UIColor✅"
+    case uiContextMenuInteraction = "UIContextMenuInteraction✅"
+    case uiDatePicker = "UIDatePicker❌"
+    case uiFont = "UIFont✅"
+    case uiGestureRecognizer = "UIGestureRecognizer✅"
+    case uiHostingController = "UIHostingController✅"
+    case uiImage = "UIImage✅"
+    case uiImageView = "UIImageView✅"
+    case uiKeyCommand = "UIKeyCommand✅"
+    case uiLabel = "UILabel✅"
+    case uiLongPressGestureRecognizer = "UILongPressGestureRecognizer✅"
+    case uiNavigationController = "UINavigationController✅"
+    case uiPageControl = "UIPageControl✅"
+    case uiPickerView = "UIPickerView❌"
+    case uiProgressView = "UIProgressView✅"
+    case uiScreen = "UIScreen✅"
+    case uiScrollView = "UIScrollView✅"
+    case uiSegmentedControl = "UISegmentedControl✅"
+    case uiSlider = "UISlider❌"
+    case uiStepper = "UIStepper❌"
+    case uiStoryboard = "UIStoryboard✅"
+    case uiSwitch = "UISwitch✅"
+    case uiTabBarController = "UITabBarController✅"
+    case uiTableView = "UITableView✅"
+    case uiTapGestureRecognizer = "UITapGestureRecognizer✅"
+    case uiTextField = "UITextField✅"
+    case uiTextView = "UITextView✅"
+    case uiTouch = "UITouch✅"
+    case uiView = "UIView✅"
+    case uiViewController = "UIViewController✅"
     case uiViewControllerRepresentable = "UIViewControllerRepresentable✅"
     case uiViewRepresentable = "UIViewRepresentable✅"
+    case uiVisualEffectView = "UIVisualEffectView✅"
+    case uiWindow = "UIWindow✅"
+    case uiWindowScene = "UIWindowScene✅"
 
     var id: String { rawValue }
     var title: String { rawValue }
@@ -61,8 +66,8 @@ struct NeuronUIKitDetail: View {
                 Divider()
                 demo
                 Spacer(minLength: 20)
-                Button("Back to Sidebar") {
-                    selectedOption = nil
+                Button("Back to Neuron UIKit Overview") {
+                    selectedOption = "Neuron UIKit Overview"
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
@@ -75,36 +80,47 @@ struct NeuronUIKitDetail: View {
     @ViewBuilder
     private var demo: some View {
         switch item {
-        case .uiView: NeuronUIViewDemo()
-        case .uiApplication: NeuronUIApplicationDemo()
-        case .uiColor: NeuronUIColorDemo()
-        case .uiViewController: NeuronUIViewControllerDemo()
-        case .uiImage: NeuronUIImageDemo()
-        case .uiAlertAction: NeuronUIAlertActionDemo()
-        case .uiLabel: NeuronUILabelDemo()
-        case .uiScreen: NeuronUIScreenDemo()
-        case .uiFont: NeuronUIFontDemo()
-        case .uiAlertController: NeuronUIAlertControllerDemo()
-        case .uiButton: NeuronUIButtonDemo()
-        case .uiTouch: NeuronUITouchDemo()
-        case .uiKeyCommand: NeuronUIKeyCommandDemo()
-        case .uiTextField: NeuronUITextFieldDemo()
-        case .uiImageView: NeuronUIImageViewDemo()
-        case .uiTapGestureRecognizer: NeuronUITapGestureDemo()
-        case .uiLongPressGestureRecognizer: NeuronUILongPressGestureDemo()
-        case .uiGestureRecognizer: NeuronUIGestureRecognizerDemo()
-        case .uiWindow: NeuronUIWindowDemo()
-        case .uiTextView: NeuronUITextViewDemo()
-        case .uiTableView: NeuronUITableViewDemo()
-        case .uiWindowScene: NeuronUIWindowSceneDemo()
-        case .uiContextMenuInteraction: NeuronUIContextMenuDemo()
-        case .uiHostingController: NeuronUIHostingControllerDemo()
-        case .uiVisualEffectView: NeuronUIVisualEffectDemo()
-        case .uiCollectionView: NeuronUICollectionViewDemo()
-        case .uiStoryboard: NeuronUIStoryboardDemo()
         case .uiActivityIndicatorView: NeuronUIActivityIndicatorDemo()
+        case .uiAlertAction: NeuronUIAlertActionDemo()
+        case .uiAlertController: NeuronUIAlertControllerDemo()
+        case .uiApplication: NeuronUIApplicationDemo()
+        case .uiButton: NeuronUIButtonDemo()
+        case .uiCollectionView: NeuronUICollectionViewDemo()
+        case .uiColor: NeuronUIColorDemo()
+        case .uiContextMenuInteraction: NeuronUIContextMenuDemo()
+        case .uiDatePicker: NeuronUIDatePickerDemo()
+        case .uiFont: NeuronUIFontDemo()
+        case .uiGestureRecognizer: NeuronUIGestureRecognizerDemo()
+        case .uiHostingController: NeuronUIHostingControllerDemo()
+        case .uiImage: NeuronUIImageDemo()
+        case .uiImageView: NeuronUIImageViewDemo()
+        case .uiKeyCommand: NeuronUIKeyCommandDemo()
+        case .uiLabel: NeuronUILabelDemo()
+        case .uiLongPressGestureRecognizer: NeuronUILongPressGestureDemo()
+        case .uiNavigationController: NeuronUINavigationControllerDemo()
+        case .uiPageControl: NeuronUIPageControlDemo()
+        case .uiPickerView: NeuronUIPickerViewDemo()
+        case .uiProgressView: NeuronUIProgressViewDemo()
+        case .uiScreen: NeuronUIScreenDemo()
+        case .uiScrollView: NeuronUIScrollViewDemo()
+        case .uiSegmentedControl: NeuronUISegmentedControlDemo()
+        case .uiSlider: NeuronUISliderDemo()
+        case .uiStepper: NeuronUIStepperDemo()
+        case .uiStoryboard: NeuronUIStoryboardDemo()
+        case .uiSwitch: NeuronUISwitchDemo()
+        case .uiTabBarController: NeuronUITabBarControllerDemo()
+        case .uiTableView: NeuronUITableViewDemo()
+        case .uiTapGestureRecognizer: NeuronUITapGestureDemo()
+        case .uiTextField: NeuronUITextFieldDemo()
+        case .uiTextView: NeuronUITextViewDemo()
+        case .uiTouch: NeuronUITouchDemo()
+        case .uiView: NeuronUIViewDemo()
+        case .uiViewController: NeuronUIViewControllerDemo()
         case .uiViewControllerRepresentable: NeuronUIViewControllerRepresentableDemo()
         case .uiViewRepresentable: NeuronUIViewRepresentableDemo()
+        case .uiVisualEffectView: NeuronUIVisualEffectDemo()
+        case .uiWindow: NeuronUIWindowDemo()
+        case .uiWindowScene: NeuronUIWindowSceneDemo()
         }
     }
 }
@@ -539,6 +555,150 @@ struct NeuronUIViewControllerRepresentableDemo: UIViewRepresentable {
     func makeUIView(context: Context) -> UILabel {
         let label = UILabel()
         label.text = "UIViewControllerRepresentable protocol\nwraps UIKit view controllers in SwiftUI"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+// MARK: - New Component Demos
+
+struct NeuronUIDatePickerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.text = "UIDatePicker is unavailable on tvOS"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NeuronUINavigationControllerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.text = "UINavigationController manages\nnavigation stack for view controllers"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NeuronUIPageControlDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIPageControl {
+        let pageControl = UIPageControl()
+        pageControl.numberOfPages = 5
+        pageControl.currentPage = 2
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .blue
+        return pageControl
+    }
+    func updateUIView(_ uiView: UIPageControl, context: Context) {}
+}
+
+struct NeuronUIPickerViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.text = "UIPickerView is unavailable on tvOS"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NeuronUIProgressViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIProgressView {
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.progress = 0.65
+        progressView.progressTintColor = .blue
+        progressView.trackTintColor = .lightGray
+        return progressView
+    }
+    func updateUIView(_ uiView: UIProgressView, context: Context) {}
+}
+
+struct NeuronUIScrollViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIScrollView {
+        let scrollView = UIScrollView()
+        //'systemGray6' is unavailable in tvOS
+        scrollView.backgroundColor = .darkGray
+        
+        let contentView = UIView()
+        contentView.backgroundColor = .systemBlue
+        contentView.frame = CGRect(x: 0, y: 0, width: 800, height: 400)
+        
+        let label = UILabel()
+        label.text = "Scrollable Content Area\nSwipe to scroll"
+        label.textAlignment = .center
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.frame = CGRect(x: 200, y: 150, width: 400, height: 100)
+        
+        contentView.addSubview(label)
+        scrollView.addSubview(contentView)
+        scrollView.contentSize = contentView.frame.size
+        
+        return scrollView
+    }
+    func updateUIView(_ uiView: UIScrollView, context: Context) {}
+}
+
+struct NeuronUISegmentedControlDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UISegmentedControl {
+        let segmentedControl = UISegmentedControl(items: ["First", "Second", "Third"])
+        segmentedControl.selectedSegmentIndex = 0
+        return segmentedControl
+    }
+    func updateUIView(_ uiView: UISegmentedControl, context: Context) {}
+}
+
+struct NeuronUISliderDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.text = "UISlider is unavailable on tvOS"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NeuronUIStepperDemo: UIViewRepresentable {
+    //UIStepper' is unavailable in tvOS
+    func makeUIView(context: Context) -> UILabel {
+//        let stepper = UIStepper()
+//        stepper.minimumValue = 0
+//        stepper.maximumValue = 100
+//        stepper.value = 50
+//        stepper.stepValue = 1
+//        return stepper
+        let label = UILabel()
+        label.text = "UIStepper is unavailable on tvOS"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NeuronUISwitchDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.text = "UISwitch is available on tvOS\nbut not commonly used"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NeuronUITabBarControllerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.text = "UITabBarController manages\ntab-based navigation interface"
         label.textAlignment = .center
         label.numberOfLines = 0
         return label

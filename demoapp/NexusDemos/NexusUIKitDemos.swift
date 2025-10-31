@@ -1,26 +1,44 @@
  //  NexusUIKitDemos.swift
-//  38 UIKit components wrapped for SwiftUI previews on tvOS.
+//  65 UIKit components wrapped for SwiftUI previews on tvOS.
 
 import SwiftUI
 import UIKit
 
-// MARK: - UIKit Component Enum (38)
+// MARK: - UIKit Component Enum (65)
 
 enum NexusUIKitComponent: String, CaseIterable, Identifiable {
     // Sorted alphabetically
+    case avPlayer = "AVPlayer✅"
+    case avPlayerViewController = "AVPlayerViewController✅"
     case caGradientLayer = "CAGradientLayer✅"
     case caLayer = "CALayer✅"
     case caShapeLayer = "CAShapeLayer✅"
+    case cgColorSpace = "CGColorSpace✅"
+    case cgContext = "CGContext✅"
+    case cgImage = "CGImage✅"
+    case nsCalendar = "NSCalendar✅"
+    case nsDate = "NSDate✅"
+    case nsDateComponents = "NSDateComponents✅"
+    case nsDateFormatter = "NSDateFormatter✅"
+    case nsRegularExpression = "NSRegularExpression✅"
+    case scanner = "Scanner✅"
     case uiActivityIndicator = "UIActivityIndicatorView✅"
+    case uiActivityViewController = "UIActivityViewController❌"
     case uiAlertController = "UIAlertController✅"
     case uiBarButtonItem = "UIBarButtonItem✅"
     case uiBezierPath = "UIBezierPath✅"
     case uiBlurEffect = "UIBlurEffect✅"
     case uiButton = "UIButton✅"
     case uiCollectionView = "UICollectionView✅"
+    case uiCollectionViewCell = "UICollectionViewCell✅"
+    case uiColor = "UIColor✅"
+    case uiDatePicker = "UIDatePicker❌"
     case uiDevice = "UIDevice✅"
+    case uiDocumentPickerViewController = "UIDocumentPickerViewController❌"
     case uiEdgeInsets = "UIEdgeInsets✅"
     case uiHostingController = "UIHostingController✅"
+    case uiImage = "UIImage✅"
+    case uiImagePickerController = "UIImagePickerController❌"
     case uiImageView = "UIImageView✅"
     case uiKeyCommand = "UIKeyCommand✅"
     case uiLabel = "UILabel✅"
@@ -31,21 +49,32 @@ enum NexusUIKitComponent: String, CaseIterable, Identifiable {
     case uiNavigationController = "UINavigationController✅"
     case uiPageControl = "UIPageControl✅"
     case uiPanGesture = "UIPanGestureRecognizer✅"
+    case uiPickerView = "UIPickerView❌"
     case uiPopoverPresentation = "UIPopoverPresentationController❌"
     case uiPresentationController = "UIPresentationController✅"
+    case uiProgressView = "UIProgressView✅"
     case uiScreen = "UIScreen✅"
     case uiScrollView = "UIScrollView✅"
     case uiSegmentedControl = "UISegmentedControl✅"
     case uiSlider = "UISlider❌"
+    case uiSplitViewController = "UISplitViewController✅"
     case uiStackView = "UIStackView✅"
+    case uiStatusBar = "UIStatusBar❌"
     case uiStatusBarStyle = "UIStatusBarStyle❌"
     case uiSwitch = "UISwitch✅"
+    case uiTabBar = "UITabBar✅"
     case uiTabBarController = "UITabBarController✅"
     case uiTableView = "UITableView✅"
+    case uiTableViewCell = "UITableViewCell✅"
     case uiTapGesture = "UITapGestureRecognizer✅"
     case uiTextField = "UITextField✅"
     case uiTextView = "UITextView✅"
+    case uiToolbar = "UIToolbar❌"
+    case uiView = "UIView✅"
+    case uiViewController = "UIViewController✅"
     case uiVisualEffectView = "UIVisualEffectView✅"
+    case uiWebView = "UIWebView❌"
+    case wkWebView = "WKWebView❌"
 
     var id: String { rawValue }
     var title: String { rawValue }
@@ -63,8 +92,8 @@ struct NexusUIKitDetail: View {
                 Divider()
                 demo
                 Spacer(minLength: 20)
-                Button("Back to Sidebar") {
-                    selectedOption = nil
+                Button("Back to UIKit Overview") {
+                    selectedOption = "UIKit Overview"
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
@@ -77,19 +106,37 @@ struct NexusUIKitDetail: View {
     @ViewBuilder
     private var demo: some View {
         switch item {
+        case .avPlayer: AVPlayerDemo()
+        case .avPlayerViewController: AVPlayerViewControllerDemo()
         case .caGradientLayer: CAGradientLayerDemo()
         case .caLayer: CALayerDemo()
         case .caShapeLayer: CAShapeLayerDemo()
+        case .cgColorSpace: CGColorSpaceDemo()
+        case .cgContext: CGContextDemo()
+        case .cgImage: CGImageDemo()
+        case .nsCalendar: NSCalendarDemo()
+        case .nsDate: NSDateDemo()
+        case .nsDateComponents: NSDateComponentsDemo()
+        case .nsDateFormatter: NSDateFormatterDemo()
+        case .nsRegularExpression: NSRegularExpressionDemo()
+        case .scanner: ScannerDemo()
         case .uiActivityIndicator: UIKitActivityIndicatorDemo()
+        case .uiActivityViewController: UIActivityViewControllerDemo()
         case .uiAlertController: UIKitAlertControllerDemo()
         case .uiBarButtonItem: UIKitBarButtonItemDemo()
         case .uiBezierPath: UIKitBezierPathDemo()
         case .uiBlurEffect: UIKitBlurEffectDemo()
         case .uiButton: UIKitButtonDemo()
         case .uiCollectionView: UIKitCollectionViewDemo()
+        case .uiCollectionViewCell: UICollectionViewCellDemo()
+        case .uiColor: UIColorDemo()
+        case .uiDatePicker: UIDatePickerDemo()
         case .uiDevice: UIKitDeviceDemo()
+        case .uiDocumentPickerViewController: UIDocumentPickerViewControllerDemo()
         case .uiEdgeInsets: UIEdgeInsetsDemo()
         case .uiHostingController: UIHostingControllerDemo()
+        case .uiImage: UIImageDemo()
+        case .uiImagePickerController: UIImagePickerControllerDemo()
         case .uiImageView: UIKitImageViewDemo()
         case .uiKeyCommand: UIKitKeyCommandDemo()
         case .uiLabel: UIKitLabelDemo()
@@ -100,21 +147,32 @@ struct NexusUIKitDetail: View {
         case .uiNavigationController: UINavigationControllerDemo()
         case .uiPageControl: UIKitPageControlDemo()
         case .uiPanGesture: UIKitPanGestureDemo()
+        case .uiPickerView: UIPickerViewDemo()
         case .uiPopoverPresentation: UIPopoverPresentationDemo()
         case .uiPresentationController: UIPresentationControllerDemo()
+        case .uiProgressView: UIProgressViewDemo()
         case .uiScreen: UIKitScreenDemo()
         case .uiScrollView: UIKitScrollViewDemo()
         case .uiSegmentedControl: UIKitSegmentedControlDemo()
         case .uiSlider: UIKitSliderDemo()
+        case .uiSplitViewController: UISplitViewControllerDemo()
         case .uiStackView: UIKitStackViewDemo()
+        case .uiStatusBar: UIStatusBarDemo()
         case .uiStatusBarStyle: UIStatusBarStyleDemo()
         case .uiSwitch: UIKitSwitchDemo()
+        case .uiTabBar: UITabBarDemo()
         case .uiTabBarController: UITabBarControllerDemo()
         case .uiTableView: UIKitTableViewDemo()
+        case .uiTableViewCell: UITableViewCellDemo()
         case .uiTapGesture: UIKitTapGestureDemo()
         case .uiTextField: UIKitTextFieldDemo()
         case .uiTextView: UIKitTextViewDemo()
+        case .uiToolbar: UIToolbarDemo()
+        case .uiView: UIViewDemo()
+        case .uiViewController: UIViewControllerDemo()
         case .uiVisualEffectView: UIKitVisualEffectDemo()
+        case .uiWebView: UIWebViewDemo()
+        case .wkWebView: WKWebViewDemo()
         }
     }
 }
@@ -619,6 +677,424 @@ struct UIEdgeInsetsDemo: UIViewRepresentable {
         l.text = "UIEdgeInsets: \(Int(inset.top)),\(Int(inset.left)),\(Int(inset.bottom)),\(Int(inset.right))"
         l.textAlignment = .center
         l.numberOfLines = 0
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+// MARK: - New Component Demos
+
+import AVKit
+
+struct AVPlayerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "AVPlayer manages playback of audio/video content"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct AVPlayerViewControllerDemo: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let controller = AVPlayerViewController()
+        // Create a simple video URL for demo
+        if let url = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4") {
+            controller.player = AVPlayer(url: url)
+        }
+        return controller
+    }
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {}
+}
+
+struct CGColorSpaceDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "CGColorSpace manages color spaces (sRGB, Display P3, etc.)"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct CGContextDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .white
+        //'systemBackground' is unavailable in tvOS
+        
+        // Custom drawing view
+        let drawingView = CGContextDrawingView()
+        drawingView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(drawingView)
+        
+        NSLayoutConstraint.activate([
+            drawingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            drawingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            drawingView.widthAnchor.constraint(equalToConstant: 200),
+            drawingView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        return view
+    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+class CGContextDrawingView: UIView {
+    override func draw(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        
+        // Draw a simple shape with CGContext
+        context.setFillColor(UIColor.blue.cgColor)
+        context.fillEllipse(in: CGRect(x: 50, y: 50, width: 100, height: 100))
+        
+        context.setStrokeColor(UIColor.red.cgColor)
+        context.setLineWidth(3)
+        context.strokeEllipse(in: CGRect(x: 25, y: 25, width: 150, height: 150))
+    }
+}
+
+struct CGImageDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "CGImage represents bitmap image data"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NSCalendarDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let calendar = Calendar.current
+        let l = UILabel()
+        l.text = "NSCalendar identifier: \(calendar.identifier)"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NSDateDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let date = Date()
+        let l = UILabel()
+        l.text = "Current NSDate: \(date)"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NSDateComponentsDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        let l = UILabel()
+        l.text = "NSDateComponents: \(components.year ?? 0)/\(components.month ?? 0)/\(components.day ?? 0)"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NSDateFormatterDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        let l = UILabel()
+        l.text = "NSDateFormatter: \(formatter.string(from: Date()))"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct NSRegularExpressionDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        do {
+            let regex = try NSRegularExpression(pattern: "\\b\\w+@\\w+\\.\\w+\\b")
+            let text = "Contact us at support@example.com"
+            let matches = regex.numberOfMatches(in: text, range: NSRange(text.startIndex..., in: text))
+            l.text = "NSRegularExpression found \(matches) email(s)"
+        } catch {
+            l.text = "NSRegularExpression error"
+        }
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct ScannerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let scanner = Scanner(string: "123 456 789")
+        var number: Int = 0
+        scanner.scanInt(&number)
+        let l = UILabel()
+        l.text = "Scanner parsed: \(number)"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIActivityViewControllerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIActivityViewController is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UICollectionViewCellDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UICollectionViewCell {
+        let cell = UICollectionViewCell()
+        cell.backgroundColor = .systemBlue
+        
+        let label = UILabel()
+        label.text = "Cell"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor)
+        ])
+        
+        return cell
+    }
+    func updateUIView(_ uiView: UICollectionViewCell, context: Context) {}
+}
+
+struct UIColorDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let colors: [UIColor] = [.red, .green, .blue, .yellow, .purple]
+        for color in colors {
+            let colorView = UIView()
+            colorView.backgroundColor = color
+            stackView.addArrangedSubview(colorView)
+        }
+        
+        view.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.widthAnchor.constraint(equalToConstant: 300),
+            stackView.heightAnchor.constraint(equalToConstant: 60)
+        ])
+        
+        return view
+    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+struct UIDatePickerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIDatePicker is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIDocumentPickerViewControllerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIDocumentPickerViewController is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIImageDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "star.fill")
+        imageView.tintColor = .systemYellow
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }
+    func updateUIView(_ uiView: UIImageView, context: Context) {}
+}
+
+struct UIImagePickerControllerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIImagePickerController is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIPickerViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIPickerView is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIProgressViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIProgressView {
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.progress = 0.7
+        progressView.progressTintColor = .systemBlue
+        progressView.trackTintColor = .systemGray
+        return progressView
+    }
+    func updateUIView(_ uiView: UIProgressView, context: Context) {}
+}
+
+struct UISplitViewControllerDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UISplitViewController manages master-detail interface"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIStatusBarDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIStatusBar is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UITableViewCellDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text = "UITableViewCell Demo"
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+    func updateUIView(_ uiView: UITableViewCell, context: Context) {}
+}
+
+struct UITabBarDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UITabBar {
+        let tabBar = UITabBar()
+        let item1 = UITabBarItem(title: "First", image: UIImage(systemName: "1.circle"), tag: 1)
+        let item2 = UITabBarItem(title: "Second", image: UIImage(systemName: "2.circle"), tag: 2)
+        tabBar.items = [item1, item2]
+        tabBar.selectedItem = item1
+        return tabBar
+    }
+    func updateUIView(_ uiView: UITabBar, context: Context) {}
+}
+
+struct UIToolbarDemo: UIViewRepresentable {
+    // 'UIToolbar' is unavailable in tvOS
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIToolbar is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct UIViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .systemBlue
+        
+        let label = UILabel()
+        label.text = "Basic UIView"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        return view
+    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+struct UIViewControllerDemo: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        let vc = UIViewController()
+        vc.view.backgroundColor = .white
+        
+        let label = UILabel()
+        label.text = "UIViewController Demo"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        vc.view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor)
+        ])
+        
+        return vc
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+struct UIWebViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "UIWebView is deprecated and unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
+        return l
+    }
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+struct WKWebViewDemo: UIViewRepresentable {
+    func makeUIView(context: Context) -> UILabel {
+        let l = UILabel()
+        l.text = "WKWebView is unavailable on tvOS"
+        l.numberOfLines = 0
+        l.textAlignment = .center
         return l
     }
     func updateUIView(_ uiView: UILabel, context: Context) {}
