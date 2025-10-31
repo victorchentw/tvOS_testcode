@@ -766,21 +766,23 @@ struct SwiftUIComponentsOverview: View {
                         Button(action: {
                             selectedOption = "Nexus SwiftUI: \(component.rawValue)"
                         }) {
-                            VStack(spacing: 8) {
+                            VStack(alignment: .leading, spacing: 0) {
                                 Text(component.title)
                                     .font(.body) // 組件名稱字型
-                                    .multilineTextAlignment(.center)
+                                    .multilineTextAlignment(.leading)
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5) // 最小縮放到 50%
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                Text(component.title.contains("✅") ? "Supported" : "Not Supported")
-                                    // .font(.caption) // 支援狀態字型
-                                    .font(.system(size: 12)) 
-                                    .foregroundColor(component.title.contains("✅") ? .green : .red)
+                                // Text(component.title.contains("✅") ? "Supported" : "Not Supported")
+                                //     // .font(.caption) // 支援狀態字型
+                                //     .font(.system(size: 12)) 
+                                //     .foregroundColor(component.title.contains("✅") ? .green : .red)
                             }
-                            .frame(minHeight: 80)
+                            .frame(minHeight: 70)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(.vertical, 1)   // 上下 12 點間距
+                            .padding(.horizontal, 1) // 左右 16 點間距
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(component.title.contains("✅") ? 
@@ -828,21 +830,24 @@ struct UIKitComponentsOverview: View {
                         Button(action: {
                             selectedOption = "Nexus UIKit: \(component.rawValue)"
                         }) {
-                            VStack(spacing: 4) {
+                            VStack(alignment: .leading, spacing:0) {
                                 Text(component.title)
                                 .font(.body) // 組件名稱字型
                                     // .font(.system(size: 20)) // 組件名稱字型
-                                    .multilineTextAlignment(.center)
+                                    .multilineTextAlignment(.leading)
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5) // 最小縮放到 50%
+                                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                                Text(component.title.contains("✅") ? "Supported" : "Not Supported")
-                                    .font(.system(size: 12)) // 支援狀態字型
-                                    .foregroundColor(component.title.contains("✅") ? .green : .red)
+                                // Text(component.title.contains("✅") ? "Supported" : "Not Supported")
+                                //     .font(.system(size: 12)) // 支援狀態字型
+                                //     .foregroundColor(component.title.contains("✅") ? .green : .red)
                             }
-                            .frame(minHeight: 80)
+                            .frame(minHeight: 70)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            // .padding()
+                            .padding(.vertical, 1)   // 上下 12 點間距
+                            .padding(.horizontal, 1) // 左右 16 點間距
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(component.title.contains("✅") ? 
@@ -890,20 +895,22 @@ struct NeuronSwiftUIComponentsOverview: View {
                         Button(action: {
                             selectedOption = "Neuron SwiftUI: \(component.rawValue)"
                         }) {
-                            VStack(spacing: 8) {
+                            VStack(alignment: .leading, spacing: 0) {
                                 Text(component.title)
                                     .font(.body)
-                                    .multilineTextAlignment(.center)
+                                    .multilineTextAlignment(.leading)
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                                Text("Supported")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.green)
+                                // Text("Supported")
+                                //     .font(.system(size: 12))
+                                //     .foregroundColor(.green)
                             }
-                            .frame(minHeight: 80)
+                            .frame(minHeight: 70)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(.vertical, 1)   // 上下 12 點間距
+                            .padding(.horizontal, 1) // 左右 16 點間距
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(Color.green.opacity(0.1))
@@ -947,20 +954,22 @@ struct NeuronUIKitComponentsOverview: View {
                         Button(action: {
                             selectedOption = "Neuron UIKit: \(component.rawValue)"
                         }) {
-                            VStack(spacing: 4) {
+                            VStack(alignment: .leading, spacing: 0) {
                                 Text(component.title)
                                     .font(.body)
-                                    .multilineTextAlignment(.center)
+                                    .multilineTextAlignment(.leading)
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                                Text("Supported")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.green)
+                                // Text("Supported")
+                                //     .font(.system(size: 12))
+                                //     .foregroundColor(.green)
                             }
-                            .frame(minHeight: 80)
+                            .frame(minHeight: 70)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(.vertical, 1)   // 上下 12 點間距
+                            .padding(.horizontal, 1) // 左右 16 點間距
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(Color.green.opacity(0.1))

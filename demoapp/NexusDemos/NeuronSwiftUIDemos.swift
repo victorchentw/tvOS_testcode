@@ -15,33 +15,33 @@ struct NeuronPerson: Identifiable {
 
 enum NeuronSwiftUIComponent: String, CaseIterable, Identifiable {
     // Core Layout Components (sorted by usage)
-    case spacer = "Spacer✅"
-    case text = "Text✅"
-    case hstack = "HStack✅"
-    case vstack = "VStack✅"
-    case image = "Image✅"
-    case zstack = "ZStack✅"
-    case group = "Group✅"
-    case lazyVStack = "LazyVStack✅"
-    case scrollView = "ScrollView✅"
+    case spacer = "✅Spacer"
+    case text = "✅Text"
+    case hstack = "✅HStack"
+    case vstack = "✅VStack"
+    case image = "✅Image"
+    case zstack = "✅ZStack"
+    case group = "✅Group"
+    case lazyVStack = "✅LazyVStack"
+    case scrollView = "✅ScrollView"
     
     // Interactive Components
-    case picker = "Picker✅"
-    case toggle = "Toggle✅"
-    case button = "Button✅"
+    case picker = "✅Picker"
+    case toggle = "✅Toggle"
+    case button = "✅Button"
     
     // Modifiers as Components (most used)
-    case frameModifier = ".frame✅"
-    case backgroundModifier = ".background✅"
-    case paddingModifier = ".padding✅"
-    case cornerRadiusModifier = ".cornerRadius✅"
-    case opacityModifier = ".opacity✅"
-    case alertModifier = ".alert✅"
-    case onTapGestureModifier = ".onTapGesture✅"
-    case onAppearModifier = ".onAppear✅"
-    case overlayModifier = ".overlay✅"
-    case disabledModifier = ".disabled✅"
-    case focusedModifier = ".focused✅"
+    case frameModifier = "✅.frame"
+    case backgroundModifier = "✅.background"
+    case paddingModifier = "✅.padding"
+    case cornerRadiusModifier = "✅.cornerRadius"
+    case opacityModifier = "✅.opacity"
+    case alertModifier = "✅.alert"
+    case onTapGestureModifier = "✅.onTapGesture"
+    case onAppearModifier = "✅.onAppear"
+    case overlayModifier = "✅.overlay"
+    case disabledModifier = "✅.disabled"
+    case focusedModifier = "✅.focused"
 
     var id: String { rawValue }
     var title: String { rawValue }
