@@ -301,7 +301,7 @@ struct ContentView: View {
             // navigationsplitViewColumnWidth doesn't affect liquid glass well in tvOS
   
             .navigationTitle("Nexus Components")
-            .listStyle(.sidebar)
+            //.listStyle(.sidebar)
             //.listStyle(.sidebar) 'sidebar' is unavailable in tvOS
 
         } detail: {
@@ -693,9 +693,10 @@ struct TestView: View {
                             Text("• .borderedProminent Style: Includes built-in focus effects, no extra focus management needed")
                             // Text("• Use .fixedSize(): Let components auto-size based on content, more flexible than fixed sizes")
                             Text("• TabView Focus Fix: Wrap TabView with Button(.plain) to make it focusable from other elements")
-                            Text("• tvOS Limitations: ColorPicker, Stepper and Slider components are not available on tvOS platform")
+                            Text("⚠️ tvOS Limitations: ColorPicker, Stepper and Slider components are not available on tvOS platform")
                             Text("• navigationSplitViewStyle .balanced doesn't work in tvOS")
-                            Text("• navigationSplitViewColumnWidth doesn't affect liquid glass well in tvOS")
+                            Text("⚠️ navigationSplitViewColumnWidth doesn't affect liquid glass (floating sidebar) well in tvOS, shows less than 1/5 of screen width")
+                            Text("⚠️ Menu in NavigationSplitView: toolbar Menu cannot be triggered in full-page sidebar mode (like controller can't open)")
                         }
                         .font(.caption)
                         .foregroundColor(.secondary)
